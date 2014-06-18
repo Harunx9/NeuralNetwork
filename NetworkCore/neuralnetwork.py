@@ -2,10 +2,11 @@
 __author__ = 'Szymon Wanot and Paweł Siemienik'
 from math import exp
 
+
 class Neuron():
-    def __init__(self, input_number, input_weights):
+    def __init__(self, input_number):
         self.input_number = input_number
-        self.input_weights = input_weights
+        self.input_weights = []
 
     def count_input(self):
         for i in range(self.input_number):
@@ -16,6 +17,7 @@ class NeuralLayer():
     def __init__(self, neuron_number, input_per_neuron):
         self.neuron_number = neuron_number
         self.input_per_neuron = input_per_neuron
+        self.neurons = [Neuron(self.input_per_neuron) for i in range(self.neuron_number)]
 
 
 class NeuralNetwork():
