@@ -12,9 +12,9 @@ class Neuron():
     def random_weights(self):
         self.input_number = [random() for i in range(self.input_number)]
 
-    def count_input(self):
+    def count_input(self, inputs=[]):
         for i in range(self.input_number):
-            self.input_count += i * self.input_weights[i]
+            self.input_count += inputs[i] * self.input_weights[i]
 
 
 class NeuralLayer():
@@ -31,12 +31,16 @@ class NeuralNetwork():
         self.number_outputs = number_outputs
         self.neuron_per_hidden_layer = neuron_per_hidden_layer
         self.hidden_layers = []
+        self.bias = 0
 
     def create_network(self):
-        pass
+        for i in range(self.hidden_layers):
+            self.hidden_layers.append(NeuralLayer(self.neuron_per_hidden_layer, self.number_inputs))
 
     def put_weights(self, weight_list):
-        pass
+        for layer in self.hidden_layers:
+            for neuron in layer.neurons:
+                neuron.input_weights = weight_list
 
     def update(self, input_list):
         outputs = []
@@ -52,7 +56,11 @@ class NeuralNetwork():
 
             #clear output
             del outputs[:]
-
+            for neuron in self.hidden_layers[layer].neurons:
+                activation = neuron.count_input(input_list)
+                activation += neuron.input_weights[self.number_inputs-1] * self.bias
+                outputs.append(activation)
+        return outputs
 
     def sigmond(self, activation, response):
         return 1 / (1 + exp(-activation / response))
