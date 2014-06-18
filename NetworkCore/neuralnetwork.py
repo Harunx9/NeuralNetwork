@@ -1,6 +1,6 @@
 # coding: utf-8
 __author__ = 'Szymon Wanot and Paweł Siemienik'
-
+from math import exp
 
 class Neuron():
     def __init__(self, input_number, input_weights):
@@ -24,6 +24,7 @@ class NeuralNetwork():
         self.number_hidden_layers = number_hidden_layers
         self.number_outputs = number_outputs
         self.neuron_per_hidden_layer = neuron_per_hidden_layer
+        self.hidden_layers = []
 
     def create_network(self):
         pass
@@ -32,7 +33,20 @@ class NeuralNetwork():
         pass
 
     def update(self, input_list):
-        pass
+        outputs = []
+        # validate inputs
+        if len(input_list) != self.number_inputs:
+            print "Incorrect inputs"
+            return outputs
+
+        for layer in range(self.number_hidden_layers):
+            #move to next layer
+            if layer > 0:
+                input_list = outputs
+
+            #clear output
+            del outputs[:]
+
 
     def sigmond(self, activation, response):
-        pass
+        return 1 / (1 + exp(-activation / response))
