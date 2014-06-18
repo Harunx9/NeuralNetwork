@@ -19,5 +19,20 @@ class NeuralLayer():
 
 
 class NeuralNetwork():
-    def __init__(self, layers):
-        self.layers = layers
+    def __init__(self, number_inputs, number_hidden_layers, number_outputs, neuron_per_hidden_layer):
+        self.number_inputs = number_inputs
+        self.number_hidden_layers = number_hidden_layers
+        self.number_outputs = number_outputs
+        self.neuron_per_hidden_layer = neuron_per_hidden_layer
+
+    def create_network(self):
+        pass
+
+    def put_weights(self, weight_list):
+        pass
+
+    def update(self, input_list):
+        pass
+
+    def sigmond(self, activation, response):
+        pass
