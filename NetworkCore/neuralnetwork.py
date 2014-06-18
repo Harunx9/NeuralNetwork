@@ -1,12 +1,16 @@
 # coding: utf-8
 __author__ = 'Szymon Wanot and Paweł Siemienik'
 from math import exp
+from random import random
 
 
 class Neuron():
     def __init__(self, input_number):
         self.input_number = input_number
         self.input_weights = []
+
+    def random_weights(self):
+        self.input_number = [random() for i in range(self.input_number)]
 
     def count_input(self):
         for i in range(self.input_number):
