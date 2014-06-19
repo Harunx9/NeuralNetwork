@@ -1,7 +1,10 @@
 # coding: utf-8
+import nnconf
+
 __author__ = 'Szymon Wanot and Paweł Siemienik'
 from math import exp
 from random import random
+import nnconf
 
 
 class Neuron():
@@ -31,7 +34,7 @@ class NeuralNetwork():
         self.number_outputs = number_outputs
         self.neuron_per_hidden_layer = neuron_per_hidden_layer
         self.hidden_layers = []
-        self.bias = 0
+        self.bias = nnconf.CONFIG.get('bias', 0)
 
     def create_network(self):
         for i in range(self.hidden_layers):
@@ -59,8 +62,9 @@ class NeuralNetwork():
             for neuron in self.hidden_layers[layer].neurons:
                 activation = neuron.count_input(input_list)
                 activation += neuron.input_weights[self.number_inputs-1] * self.bias
-                outputs.append(activation)
+                outputs.append(sigmond(activation, nnconf.CONFIG.get('response', 0)))
         return outputs
 
-    def sigmond(self, activation, response):
-        return 1 / (1 + exp(-activation / response))
+
+def sigmond(activation, response):
+    return 1 / (1 + exp(-activation / response))
