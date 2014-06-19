@@ -1,5 +1,6 @@
 # coding: utf-8
 __author__ = 'Szymon Wanot and Paweł Siemienik'
+from NetworkCore.neuralnetwork import NeuralNetwork
 
 
 class NnApp():
