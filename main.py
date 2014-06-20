@@ -4,11 +4,14 @@ from NetworkCore.neuralnetwork import NeuralNetwork
 
 
 class NnApp():
-    def __init__(self, config):
-        pass
+    def __init__(self):
+        self.network = NeuralNetwork(4, 2, 2, 2)
+        self.network.create_network()
 
     def run(self):
-        pass
+        net_out = self.network.update([1, 0, 3, 4])
+        print net_out
 
 if __name__ == '__main__':
-    NnApp().run()
+    app = NnApp()
+    app.run()
