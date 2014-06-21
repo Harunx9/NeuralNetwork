@@ -14,8 +14,8 @@ class SimpleNN():
         self.n_hidden_layers = number_hidden_layers
         # network activation list
         self.a_inputs = [1.0 for i in range(self.n_inputs + 1)]
-        self.a_outputs = [1.0 for i in range(self.n_outputs + 1)]
-        self.a_hidden_layers = [1.0 for i in range(self.n_hidden_layers)]
+        self.a_outputs = [1.0 for i in range(self.n_outputs)]
+        self.a_hidden_layers = [1.0 for i in range(self.n_hidden_layers + 1)]
         # initialize random weights
         self.weight_input = [[random() for i in range(self.n_hidden_layers + 1)] for j in range(self.n_inputs + 1)]
         self.weight_output = [[random() for i in range(self.n_outputs)] for j in range(self.n_hidden_layers + 1)]
@@ -54,7 +54,7 @@ class SimpleNN():
             out_delta[i] = targets[i] - self.a_outputs[i]
             out_delta[i] *= derivative_sigmoid(self.a_outputs[i])
 
-        hidden_delta = [0.0 for i in range(self.n_hidden_layers)]
+        hidden_delta = [0.0 for i in range(self.n_hidden_layers + 1)]
 
         for i in range(len(self.a_hidden_layers)):
             error = 0.0
@@ -71,8 +71,8 @@ class SimpleNN():
                 self.change_output[i][j] = change
 
         # update input weights
-        for i in range(len(self.n_inputs)):
-            for j in range(len(self.n_hidden_layers)):
+        for i in range(len(self.a_inputs)):
+            for j in range(len(self.a_hidden_layers)):
                 change = hidden_delta[j] * self.a_inputs[i]
                 self.weight_input[i][j] = self.weight_input[i][j] + (learning_rate * change) \
                                             +(momentum_factor * self.change_input[i][j])
@@ -92,7 +92,13 @@ class SimpleNN():
                 error += tmp_error
 
                 if i % (iterations / 10) == 0:
-                    print 'error threshold '.join(error)
+                    print 'error threshold ', error
 
-    def test_learning(self, test_set=[]):
-        pass
+    def test_learning(self, test_set=[], verbose=False):
+        results = []
+        for test in test_set:
+            if verbose:
+                print test, '=>', self.think(test)
+            results.append(self.think(test))
+
+        return results

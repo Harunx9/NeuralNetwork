@@ -115,7 +115,7 @@ class NeuralNetwork():
             error_treshold = 0.0
             for j in range(self.number_outputs):
                 error_treshold += out_deltas[j] * self.hidden_layers[i].neurons[i].input_weights[j]
-            #hidden_deltas[i] = derivative_sigmoid(self.hidden_layers[i].)
+            hidden_deltas[i] = derivative_sigmoid(self.hidden_layers[i])
 
 
     def train(self):
