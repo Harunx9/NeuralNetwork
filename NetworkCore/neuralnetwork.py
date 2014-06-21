@@ -77,7 +77,6 @@ class NeuralNetwork():
                 neuron.input_weights = weight_list
 
     def update(self, input_list):
-        self.outputs = []
         # validate inputs
         if len(input_list) != self.number_inputs:
             print "Incorrect inputs"
@@ -94,6 +93,10 @@ class NeuralNetwork():
                 activation = neuron.count_input(input_list)
                 activation += neuron.input_weights[self.number_inputs-1] * self.bias
                 self.outputs.append(sigmoid(activation))
+
+        for out in range(self.number_outputs):
+            total = 0.0
+
         return self.outputs
 
     def back_propagation(self, targets, learning_rate, momentum_factor):
