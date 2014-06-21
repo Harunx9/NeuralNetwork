@@ -6,10 +6,10 @@ import learningset
 
 class NnApp():
     def __init__(self):
-        self.network = NeuralNetwork(2, 2, 1)
+        self.network = NeuralNetwork(2, 4, 1)
 
     def run(self):
-        self.network.learn(200, learningset.LEARNING_SET, 0.5, 0.01)
+        self.network.learn(2000, learningset.LEARNING_SET, 0.5, 0.1)
         print "I'm learned"
         self.network.test_learning(learningset.TEST_SET, True)
 
