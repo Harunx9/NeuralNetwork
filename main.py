@@ -9,9 +9,9 @@ class NnApp():
         self.network = NeuralNetwork(2, 4, 1)
 
     def run(self):
-        self.network.learn(2000, learningset.LEARNING_SET, 0.5, 0.1)
+        self.network.learn(1000, learningset.LEARNING_SET_XOR, 0.2, 0.1)
         print "I'm learned"
-        self.network.test_learning(learningset.TEST_SET, True)
+        self.network.test_learning(learningset.TEST_SET_XOR, True)
 
 if __name__ == '__main__':
     app = NnApp()

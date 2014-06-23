@@ -1,6 +1,6 @@
 # coding: utf-8
 __author__ = 'Szymon Wanot and Paweł Siemienik'
-from math import exp
+from math import tanh
 from random import random
 import nnconf
 
@@ -131,7 +131,7 @@ def sigmoid(activation):
     :param activation: activation treshold from neural network
     :return: sigmoid result from activation
     """
-    return 1 / (1 + exp(-activation))
+    return tanh(activation)
 
 
 def derivative_sigmoid(activation):
@@ -140,4 +140,5 @@ def derivative_sigmoid(activation):
     :param activation:
     :return: result derivative sigmoid
     """
-    return 1 - activation**2
+    return 1 - (tanh(activation)**2)
+    #return sigmoid(activation)*(1 - sigmoid(activation))
