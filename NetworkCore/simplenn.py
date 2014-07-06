@@ -1,5 +1,6 @@
 __author__ = 'harun'
-from neuralnetwork import sigmoid, derivative_sigmoid, random
+from functions import sigmoid, derivative_sigmoid
+from random import random
 
 
 class SimpleNN():
