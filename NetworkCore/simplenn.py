@@ -81,19 +81,24 @@ class SimpleNN():
         # claculate error
         error = 0.0
         for i in range(len(targets)):
-            error += 0.5 * ((targets[i] - self.a_inputs[i])**2)
+            error += 0.5*((targets[i] - self.a_outputs[i])**2)
         return error
 
-    def learn(self, iterations, learning_set, learning_rate, momentum_factor):
-        for i in xrange(iterations):
-            error = 0.0
-            for set in learning_set:
-                self.think(set[0])
-                tmp_error = self.back_propagation(set[1], learning_rate, momentum_factor)
-                error += tmp_error
+    def learn(self, iterations, learning_set, learning_rate, momentum_factor, max_error):
+            error = 100.0
+            i = 0
+            while error > max_error:
+                for single_set in learning_set:
+                    self.think(single_set[0])
+                    tmp_error = self.back_propagation(single_set[1], learning_rate, momentum_factor)
+                    error = tmp_error
 
-                if i % (iterations / 10) == 0:
-                    print 'error threshold ', error
+                    if i % (iterations / 10) == 0:
+                        print '[ Error threshold at iteration (%s) is (%-14f) ]' % (i, error)
+                i += 1
+                if iterations < i:
+                    break
+            print "[ Iterations to learn : %s ]" % i
 
     def test_learning(self, test_set=[], verbose=False):
         results = []
