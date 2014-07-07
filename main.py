@@ -27,6 +27,11 @@ class LanguagesApp():
         network.learn(1000, counter.data, 0.2, 0.1)
         print "I'm learned"
 
+        i = 0
+        while raw_input("Do you want add your test data? (y/n)") == "y":
+            i += 1
+            LANGUAGES_TEST.append(["USER no.%s" % i, raw_input("Write test USER no.%s" % i)])
+
         test_counter = CharCounterForNN(LANGUAGES_TEST)
         test_counter.count()
 
