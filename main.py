@@ -4,17 +4,17 @@ from LanguagesNN.languages import LANGUAGES_SET, LANGUAGES_TEST
 
 __author__ = 'Szymon Wanot and Paweł Siemienik'
 from NetworkCore.simplenn import SimpleNN as NeuralNetwork
-import learningset
+# import learningset
 
 
-class NnApp():
-    def __init__(self):
-        self.network = NeuralNetwork(2, 4, 1)
-
-    def run(self):
-        self.network.learn(1000, learningset.LEARNING_SET_XOR, 0.2, 0.1)
-        print "I'm learned"
-        self.network.test_learning(learningset.TEST_SET_XOR, True)
+# class NnApp():
+#     def __init__(self):
+#         self.network = NeuralNetwork(2, 4, 1)
+#
+#     def run(self):
+#         self.network.learn(1000, learningset.LEARNING_SET_XOR, 0.2, 0.1)
+#         print "I'm learned"
+#         self.network.test_learning(learningset.TEST_SET_XOR, True)
 
 
 class LanguagesApp():
@@ -24,7 +24,7 @@ class LanguagesApp():
 
         counter.count()
         network = NeuralNetwork(len(counter.literals), 40, len(counter.languages))
-        network.learn(1000, counter.data, 0.2, 0.1)
+        network.learn(2000, counter.data, 0.2, 0.1, 0.000001)
         print "I'm learned"
 
         test_counter = CharCounterForNN(LANGUAGES_TEST)
