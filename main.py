@@ -1,4 +1,7 @@
 # coding: utf-8
+from LanguagesNN.CharCounterForNN import CharCounterForNN
+from LanguagesNN.languages import LANGUAGES_SET, LANGUAGES_TEST
+
 __author__ = 'Szymon Wanot and Paweł Siemienik'
 from NetworkCore.simplenn import SimpleNN as NeuralNetwork
 import learningset
@@ -13,6 +16,36 @@ class NnApp():
         print "I'm learned"
         self.network.test_learning(learningset.TEST_SET_XOR, True)
 
+
+class LanguagesApp():
+    @staticmethod
+    def run():
+        counter = CharCounterForNN(LANGUAGES_SET)
+
+        counter.count()
+        network = NeuralNetwork(len(counter.literals), 40, len(counter.languages))
+        network.learn(1000, counter.data, 0.2, 0.1)
+        print "I'm learned"
+
+        test_counter = CharCounterForNN(LANGUAGES_TEST)
+        test_counter.count()
+
+        for key, line in test_counter.probabilities.items():
+            input_data = []
+            for lit in counter.literals:
+                if lit in line:
+                    input_data.append(line[lit])
+                else:
+                    input_data.append(0)
+            result = network.think(input_data)
+            lang_no = result.index(max(result))
+            print "TEST FOR %s (lang no. %s is %s ); FULL OUTPUT  %s " % (
+                key,
+                lang_no,
+                counter.languages[lang_no],
+                result,
+            )
+
+
 if __name__ == '__main__':
-    app = NnApp()
-    app.run()
+    LanguagesApp.run()
