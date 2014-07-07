@@ -23,8 +23,8 @@ class LanguagesApp():
         counter = CharCounterForNN(LANGUAGES_SET)
 
         counter.count()
-        network = NeuralNetwork(len(counter.literals), 40, len(counter.languages))
-        network.learn(2000, counter.data, 0.2, 0.1, 0.000001)
+        network = NeuralNetwork(len(counter.literals), 30, len(counter.languages))
+        network.learn(10000, counter.data, 0.2, 0.1, 0.00001, 100)
         print "I'm learned"
 
         i = 0

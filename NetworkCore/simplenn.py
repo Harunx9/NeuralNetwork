@@ -84,7 +84,7 @@ class SimpleNN():
             error += 0.5*((targets[i] - self.a_outputs[i])**2)
         return error
 
-    def learn(self, iterations, learning_set, learning_rate, momentum_factor, max_error):
+    def learn(self, iterations, learning_set, learning_rate, momentum_factor, max_error, rapert_per_times=100):
             error = 100.0
             i = 0
             while error > max_error:
@@ -93,7 +93,7 @@ class SimpleNN():
                     tmp_error = self.back_propagation(single_set[1], learning_rate, momentum_factor)
                     error = tmp_error
 
-                    if i % (iterations / 10) == 0:
+                    if i % (rapert_per_times) == 0:
                         print '[ Error threshold at iteration (%s) is (%-14f) ]' % (i, error)
                 i += 1
                 if iterations < i:
